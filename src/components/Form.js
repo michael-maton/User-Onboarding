@@ -16,23 +16,10 @@ export default function Form(props) {
 
   return (
     <form className="form-container" onSubmit={onSubmit}>
-      <div className="form-submit">
-        <h2>New User</h2>
-
-        <button disabled={disabled}>submit</button>
-
-        <div className="errors">
-          <div>{errors.fname}</div>
-          <div>{errors.lname}</div>
-          <div>{errors.email}</div>
-          <div>{errors.password}</div>
-        </div>
-      </div>
-
       <div className="form-inputs">
         <h4>General information</h4>
         <label>
-          First Name
+          <span>First Name</span>
           <input
             value={values.fname}
             onChange={onChange}
@@ -41,7 +28,7 @@ export default function Form(props) {
           />
         </label>
         <label>
-          Last Name
+          <span>Last Name</span>
           <input
             value={values.lname}
             onChange={onChange}
@@ -51,7 +38,7 @@ export default function Form(props) {
         </label>
 
         <label>
-          Email
+          <span>Email</span>
           <input
             value={values.email}
             onChange={onChange}
@@ -60,7 +47,7 @@ export default function Form(props) {
           />
         </label>
         <label htmlFor="passwordInput">
-          Password
+          <span>Password</span>
           <input
             value={values.password}
             onChange={onChange}
@@ -68,19 +55,31 @@ export default function Form(props) {
             type="password"
           />
         </label>
-      </div>
 
-      <div className="TOS">
-        <label>
-          Agree to Terms of Service:
-          <input
-            type="checkbox"
-            name="TOS"
-            checked={values.TOS}
-            onChange={onChange}
-          />
-        </label>
+        <div className="TOS">
+            <label>
+            <span>I agree to Terms of Service:</span>
+            <input
+                type="checkbox"
+                name="TOS"
+                checked={values.TOS}
+                onChange={onChange}
+            />
+            </label>
+        </div>
+        <div className="form-submit">
+        <button disabled={disabled}>submit</button>
+
+        <div className="errors">
+          <div>{errors.fname}</div>
+          <div>{errors.lname}</div>
+          <div>{errors.email}</div>
+          <div>{errors.password}</div>
+          <div>{errors.TOS}</div>
+        </div>
       </div>
+      </div>
+      
     </form>
   );
 }

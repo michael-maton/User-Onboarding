@@ -4,6 +4,8 @@ import Form from "./components/Form";
 import axios from "axios";
 import * as yup from "yup";
 import schema from "./validation/formSchema";
+import UserCard from "./components/User";
+import { v4 as uuid } from "uuid";
 
 const initialFormValues = {
   fname: "",
@@ -27,14 +29,6 @@ function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
-
-  // const getUsers = () => {
-  //   axios.get("https://reqres.in/api/users")
-  //     .then((res) => {
-  //       setFriends(res.data);
-  //     })
-  //     .catch((err) => {console.log(err)});
-  // };
 
   const postNewUser = (newUser) => {
     axios.post("https://reqres.in/api/users", newUser)
@@ -75,12 +69,7 @@ function App() {
     };
     postNewUser(newUser);
   };
-
-
-  // useEffect(() => {
-  //   getFriends();
-  // }, []);
-
+  
   useEffect(() => {
     schema.isValid(formValues).then((valid) => {
       setDisabled(!valid);
@@ -88,7 +77,8 @@ function App() {
   }, [formValues]);
 
   return (
-    <div className="container">
+    <div className="wrapper">
+      <div className="container">
       <header>
         <h1>User Application</h1>
       </header>
@@ -102,16 +92,11 @@ function App() {
       />
 
       {users.map((user) => {
-        return (
-          <div className='friend container'>
-            <h2>{user.fname}</h2>
-            <h2>{user.lname}</h2>
-            <p>Email: {user.email}</p>
-          </div>
-        );
+        return <UserCard key={uuid()} details={user} />
       })}
-
+      </div>
     </div>
+    
   );
 }
 
