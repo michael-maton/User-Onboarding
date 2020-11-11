@@ -10,7 +10,7 @@ export default function UserCard(props) {
   return (
     <div className="user container">
       <h2>
-        {details.fname} {details.lname}
+        {details.fname ? details.fname : details.first_name} {details.lname ? details.lname : details.last_name}
       </h2>
       <p>Email: {details.email}</p>
     </div>

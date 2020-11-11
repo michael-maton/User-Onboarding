@@ -6,6 +6,7 @@ import * as yup from "yup";
 import schema from "./validation/formSchema";
 import UserCard from "./components/User";
 import { v4 as uuid } from "uuid";
+import Post from "./components/Post";
 
 const initialFormValues = {
   fname: "",
@@ -29,11 +30,25 @@ function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const [newUsers, setNewUsers] = useState([]);
+
+  const getUsers = () => {
+    axios.get("https://reqres.in/api/users")
+      .then((res) => {
+        // debugger;
+        setUsers(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };  
 
   const postNewUser = (newUser) => {
     axios.post("https://reqres.in/api/users", newUser)
       .then((res) => {
         setUsers([res.data, ...users]);
+        setNewUsers([res.data, ...newUsers]);
+        // <Post user={res.data}/>
         setFormValues(initialFormValues);
       })
       .catch((err) => {console.log(err)});
@@ -71,11 +86,20 @@ function App() {
   };
   
   useEffect(() => {
+    getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
+  useEffect(() => {
     schema.isValid(formValues).then((valid) => {
       setDisabled(!valid);
     });
   }, [formValues]);
-
+  
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
+  
   return (
     <div className="wrapper">
       <div className="container">
@@ -90,10 +114,27 @@ function App() {
         disabled={disabled}
         errors={formErrors}
       />
-
       {users.map((user) => {
         return <UserCard key={uuid()} details={user} />
-      })}
+        // return (
+          //   <div className='friend container'>
+          //     <h2>{user.fname}</h2>
+          //     <h2>{user.lname}</h2>
+          //     <p>Email: {user.email}</p>
+          //   </div>
+          // );
+        })}
+      {/* {users.map((user) => {
+        let userStr = JSON.stringify(user);
+        return (
+          <div className='postRequests'>
+          <pre>
+          {userStr}
+          </pre>
+          </div>
+          );
+        })} */}
+        <Post user={newUsers[0]} />
       </div>
     </div>
     
