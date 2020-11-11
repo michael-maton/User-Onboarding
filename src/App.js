@@ -101,16 +101,15 @@ function App() {
         errors={formErrors}
       />
 
-      {/* {users.map((user) => {
+      {users.map((user) => {
         return (
           <div className='friend container'>
-            <h2>{details.username}</h2>
-            <p>Email: {details.email}</p>
-            <p>Role: {details.role}</p>
-            <p>Civil: {details.civil}</p>
+            <h2>{user.fname}</h2>
+            <h2>{user.lname}</h2>
+            <p>Email: {user.email}</p>
           </div>
         );
-      })} */}
+      })}
 
     </div>
   );

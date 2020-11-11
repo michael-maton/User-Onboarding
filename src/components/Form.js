@@ -9,7 +9,6 @@ export default function Form(props) {
   };
 
   const onChange = (evt) => {
-    /* 🔥 FIX THIS SO IT ALSO WORKS WITH CHECKBOXES */
     const { name, value, checked, type } = evt.target;
     const correctValue = type === "checkbox" ? checked : value;
     change(name, correctValue);
@@ -20,24 +19,18 @@ export default function Form(props) {
       <div className="form-submit">
         <h2>New User</h2>
 
-        {/* 🔥 DISABLE THE BUTTON */}
         <button disabled={disabled}>submit</button>
 
         <div className="errors">
-          {/* 🔥 RENDER THE VALIDATION ERRORS HERE */}
-          <div>{errors.username}</div>
+          <div>{errors.fname}</div>
+          <div>{errors.lname}</div>
           <div>{errors.email}</div>
-          <div>{errors.role}</div>
-          <div>{errors.civil}</div>
+          <div>{errors.password}</div>
         </div>
       </div>
 
-      <div className="form-group inputs">
+      <div className="form-inputs">
         <h4>General information</h4>
-
-        {/* ////////// TEXT INPUTS ////////// */}
-        {/* ////////// TEXT INPUTS ////////// */}
-        {/* ////////// TEXT INPUTS ////////// */}
         <label>
           First Name
           <input
@@ -66,13 +59,13 @@ export default function Form(props) {
             type="text"
           />
         </label>
-        <label>
+        <label htmlFor="passwordInput">
           Password
           <input
             value={values.password}
             onChange={onChange}
             name="password"
-            type="text"
+            type="password"
           />
         </label>
       </div>
