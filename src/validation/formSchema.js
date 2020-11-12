@@ -5,7 +5,7 @@ export default yup.object().shape({
     .string()
     .required("Enter your first name")
     .min(1, "first name must be at least 1 char"),
-    lname: yup
+  lname: yup
     .string()
     .required("Enter your last name")
     .min(1, "last name must be at least 1 char"),

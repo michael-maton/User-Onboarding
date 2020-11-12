@@ -7,7 +7,7 @@ export default function Post(props) {
     <div className="post-requests">
         <h3>New post request:</h3>
         <div className="scroll">
-            <pre>{userStr}</pre>
+            <pre id="newPost">{userStr}</pre>
         </div>
     </div>
   );
